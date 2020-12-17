@@ -12,15 +12,15 @@ class QuestionController extends AbstractController
 { 
     /**
      * @return Response
-     * @Route("/")
+     * @Route("/", name="app_homepage")
      */
-    public function home(){
-        return new Response('welconme to home');
+    public function homepage(){
+        return $this->render('question/homepage.html.twig');
     }
 
     /**
      * @return Response
-     * @Route("/questions/{slug}")
+     * @Route("/questions/{slug}", name="app_question_show")
      */
     public function show($slug){
 
@@ -29,9 +29,14 @@ class QuestionController extends AbstractController
             'what are you talking about',
             'it is hall malo konoha'
         ];
+
+        $questionText = 'I\'ve been turned into a cat, any thoughts on how to turn back? While I\'m adorable, I don\'t really care for cat food.';
+            dump($this);
+
         return $this->render('question/show.html.twig', [
             'question'=>ucwords(str_replace('-', ' ', $slug)),
-            'answers'=>$answers
+            'answers'=>$answers,
+            'questionText'=>$questionText,
         ]);
     }
 }
